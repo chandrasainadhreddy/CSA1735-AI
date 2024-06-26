@@ -1,0 +1,63 @@
+% Define the database with facts for student, teacher, subject, and subject code
+% Format: teaches(Teacher, Subject, SubjectCode).
+%         student(Student, Subject).
+
+% Sample data
+teaches('Mrs. Smith', 'Math', 'M101').
+teaches('Mr. Johnson', 'Science', 'S102').
+teaches('Ms. Clark', 'History', 'H103').
+teaches('Mrs. Smith', 'Physics', 'P104').
+
+student('Alice', 'Math').
+student('Alice', 'Science').
+student('Bob', 'History').
+student('Charlie', 'Physics').
+student('Diana', 'Math').
+
+% Rules to query the database
+
+% Query subjects taught by a specific teacher
+find_subjects_by_teacher(Teacher, Subject, SubjectCode) :-
+    teaches(Teacher, Subject, SubjectCode).
+
+% Query teachers of a specific subject
+find_teacher_by_subject(Subject, Teacher, SubjectCode) :-
+    teaches(Teacher, Subject, SubjectCode).
+
+% Query subjects taken by a specific student
+find_subjects_by_student(Student, Subject) :-
+    student(Student, Subject).
+
+% Query students taking a specific subject
+find_students_by_subject(Subject, Student) :-
+    student(Student, Subject).
+
+% Query subjects and their codes taken by a specific student
+find_subjects_codes_by_student(Student, Subject, SubjectCode) :-
+    student(Student, Subject),
+    teaches(_, Subject, SubjectCode).
+
+% Sample queries
+% To find subjects taught by Mrs. Smith: find_subjects_by_teacher('Mrs. Smith', Subject, SubjectCode).
+% To find teacher of Math: find_teacher_by_subject('Math', Teacher, SubjectCode).
+% To find subjects taken by Alice: find_subjects_by_student('Alice', Subject).
+% To find students taking Math: find_students_by_subject('Math', Student).
+% To find subjects and their codes taken by Alice: find_subjects_codes_by_student('Alice', Subject, SubjectCode).
+
+
+
+
+
+
+
+find_subjects_by_teacher('Mrs. Smith', Subject, SubjectCode).
+
+find_teacher_by_subject('Math', Teacher, SubjectCode).
+
+find_subjects_by_student('Alice', Subject).
+
+find_students_by_subject('Math', Student).
+
+find_subjects_codes_by_student('Alice', Subject, SubjectCode).
+
+

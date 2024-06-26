@@ -1,0 +1,47 @@
+% Define the database with facts for birds and their ability to fly
+% Format: can_fly(Bird).
+
+% Sample data
+can_fly(eagle).
+can_fly(sparrow).
+can_fly(pigeon).
+can_fly(parrot).
+
+% Birds that cannot fly
+cannot_fly(penguin).
+cannot_fly(ostrich).
+cannot_fly(kiwi).
+
+% Rule to determine if a bird can fly
+bird_can_fly(Bird) :- can_fly(Bird).
+
+% Rule to determine if a bird cannot fly
+bird_cannot_fly(Bird) :- cannot_fly(Bird).
+
+% Rule to print whether a bird can fly or not
+print_flight_ability(Bird) :-
+    bird_can_fly(Bird), !,
+    format('The ~w can fly.~n', [Bird]).
+print_flight_ability(Bird) :-
+    bird_cannot_fly(Bird), !,
+    format('The ~w cannot fly.~n', [Bird]).
+print_flight_ability(Bird) :-
+    format('The flight ability of ~w is unknown.~n', [Bird]).
+
+% Sample queries
+% To check if a particular bird can fly or not: print_flight_ability(eagle).
+% To check if a particular bird can fly or not: print_flight_ability(penguin).
+% To check if a particular bird can fly or not: print_flight_ability(robin).
+
+
+
+
+
+
+print_flight_ability(eagle).
+
+
+print_flight_ability(penguin).
+
+
+print_flight_ability(robin).

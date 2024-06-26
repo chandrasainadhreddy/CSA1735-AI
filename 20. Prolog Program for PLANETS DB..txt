@@ -1,0 +1,53 @@
+% Define the database with facts for planets
+% Format: planet(Name, DistanceFromSun, Diameter).
+
+% Sample data
+planet('Mercury', 57.9, 4879).
+planet('Venus', 108.2, 12104).
+planet('Earth', 149.6, 12742).
+planet('Mars', 227.9, 6779).
+planet('Jupiter', 778.5, 139820).
+planet('Saturn', 1434, 116460).
+planet('Uranus', 2871, 50724).
+planet('Neptune', 4495, 49244).
+
+% Rules to query the database
+
+% Query distance from the sun by planet name
+find_distance(Name, Distance) :-
+    planet(Name, Distance, _).
+
+% Query diameter by planet name
+find_diameter(Name, Diameter) :-
+    planet(Name, _, Diameter).
+
+% Query planets by distance range
+planets_in_distance_range(MinDistance, MaxDistance, Name) :-
+    planet(Name, Distance, _),
+    Distance >= MinDistance,
+    Distance =< MaxDistance.
+
+% Query planets by diameter range
+planets_in_diameter_range(MinDiameter, MaxDiameter, Name) :-
+    planet(Name, _, Diameter),
+    Diameter >= MinDiameter,
+    Diameter =< MaxDiameter.
+
+% Sample queries
+% To find the distance from the sun for Earth: find_distance('Earth', Distance).
+% To find the diameter of Mars: find_diameter('Mars', Diameter).
+% To find planets within 100 and 500 million km from the sun: planets_in_distance_range(100, 500, Name).
+% To find planets with a diameter between 5000 and 15000 km: planets_in_diameter_range(5000, 15000, Name).
+
+
+
+
+
+find_distance('Earth', Distance).
+
+find_diameter('Mars', Diameter).
+
+planets_in_distance_range(100, 500, Name).
+
+planets_in_diameter_range(5000, 15000, Name).
+

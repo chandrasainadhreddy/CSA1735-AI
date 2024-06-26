@@ -1,0 +1,67 @@
+% Facts: parent(child, parent)
+parent(john, michael).
+parent(john, sarah).
+parent(susan, michael).
+parent(susan, sarah).
+parent(michael, andrew).
+parent(michael, claire).
+parent(jessica, andrew).
+parent(jessica, claire).
+
+% Rule: sibling(X, Y) means X and Y are siblings if they share at least one parent
+sibling(X, Y) :- parent(X, P), parent(Y, P), X \= Y.
+
+% Rule: father(X, Y) means X is the father of Y
+father(F, C) :- parent(C, F), male(F).
+
+% Rule: mother(X, Y) means X is the mother of Y
+mother(M, C) :- parent(C, M), female(M).
+
+% Rule: grandparent(X, Y) means X is the grandparent of Y
+grandparent(G, C) :- parent(C, P), parent(P, G).
+
+% Rule: grandchild(X, Y) means X is the grandchild of Y
+grandchild(GC, G) :- grandparent(G, GC).
+
+% Rule: ancestor(X, Y) means X is an ancestor of Y
+ancestor(A, D) :- parent(D, A).
+ancestor(A, D) :- parent(D, P), ancestor(A, P).
+
+% Rule: descendant(X, Y) means X is a descendant of Y
+descendant(D, A) :- ancestor(A, D).
+
+% Facts: male and female
+male(michael).
+male(john).
+male(andrew).
+female(susan).
+female(sarah).
+female(jessica).
+female(claire).
+
+% Sample queries:
+% To find the parents of john: parent(john, Parent).
+% To find the siblings of michael: sibling(michael, Sibling).
+% To find the grandparents of andrew: grandparent(Grandparent, andrew).
+% To find the grandchildren of susan: grandchild(Grandchild, susan).
+% To find the ancestors of claire: ancestor(Ancestor, claire).
+% To find the descendants of michael: descendant(Descendant, michael).
+
+
+
+
+
+
+parent(john, Parent).
+
+sibling(michael, Sibling).
+
+grandparent(Grandparent, andrew).
+
+grandchild(Grandchild, susan).
+
+ancestor(Ancestor, claire).
+
+descendant(Descendant, michael).
+
+

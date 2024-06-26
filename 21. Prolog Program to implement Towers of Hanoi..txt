@@ -1,0 +1,23 @@
+% Towers of Hanoi
+% hanoi(N, Source, Target, Auxiliary, Moves) - Moves is the list of moves required to move N disks from Source to Target using Auxiliary.
+
+% Base case: No disks to move
+hanoi(0, _, _, _, []).
+
+% Recursive case: Move N disks
+hanoi(N, Source, Target, Auxiliary, Moves) :-
+    N > 0,
+    N1 is N - 1,
+    hanoi(N1, Source, Auxiliary, Target, Moves1),       % Move N-1 disks from Source to Auxiliary using Target as auxiliary
+    MoveDisk = move(Source, Target),                    % Move the Nth disk from Source to Target
+    hanoi(N1, Auxiliary, Target, Source, Moves2),       % Move N-1 disks from Auxiliary to Target using Source as auxiliary
+    append(Moves1, [MoveDisk|Moves2], Moves).           % Combine the moves
+
+% Sample query
+% To solve the Towers of Hanoi for 3 disks from peg 'a' to peg 'c' using peg 'b' as auxiliary: hanoi(3, 'a', 'c', 'b', Moves).
+
+
+
+
+
+hanoi(3, 'a', 'c', 'b', Moves).

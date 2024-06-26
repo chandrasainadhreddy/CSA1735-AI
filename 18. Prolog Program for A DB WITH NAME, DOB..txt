@@ -1,0 +1,41 @@
+% Define the database with facts for name and date of birth (DOB)
+% Format: dob(Name, date(Day, Month, Year)).
+
+% Sample data
+dob('Alice', date(1, january, 1990)).
+dob('Bob', date(5, march, 1985)).
+dob('Charlie', date(12, june, 1992)).
+dob('Diana', date(23, september, 1987)).
+
+% Rules to query the database
+
+% Query DOB by name
+find_dob(Name, DOB) :- dob(Name, DOB).
+
+% Query people born in a specific year
+born_in_year(Year, Name) :- dob(Name, date(_, _, Year)).
+
+% Query people born in a specific month
+born_in_month(Month, Name) :- dob(Name, date(_, Month, _)).
+
+% Query people born on a specific day and month
+born_on_day_month(Day, Month, Name) :- dob(Name, date(Day, Month, _)).
+
+% Sample queries
+% To find Alice's DOB: find_dob('Alice', DOB).
+% To find all people born in 1990: born_in_year(1990, Name).
+% To find all people born in June: born_in_month(june, Name).
+% To find all people born on 5th March: born_on_day_month(5, march, Name).
+
+
+
+
+
+find_dob('Alice', DOB).
+
+born_in_year(1990, Name).
+
+born_in_month(june, Name).
+
+born_on_day_month(5, march, Name).
+
