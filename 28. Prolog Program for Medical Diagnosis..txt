@@ -1,0 +1,76 @@
+% Knowledge base
+
+% Symptoms of diseases
+symptom(flu, fever).
+symptom(flu, cough).
+symptom(flu, sore_throat).
+symptom(cold, cough).
+symptom(cold, sneezing).
+symptom(cold, runny_nose).
+symptom(covid19, fever).
+symptom(covid19, cough).
+symptom(covid19, loss_of_taste).
+symptom(covid19, difficulty_breathing).
+
+% Diagnoses based on symptoms
+diagnosis(Disease) :- symptom(Disease, Symptom), write(Symptom), nl, fail.
+diagnosis(_).
+
+% Rules to check for specific diseases
+has_disease(flu) :- 
+    symptom(flu, fever), 
+    symptom(flu, cough), 
+    symptom(flu, sore_throat).
+
+has_disease(cold) :- 
+    symptom(cold, cough), 
+    symptom(cold, sneezing), 
+    symptom(cold, runny_nose).
+
+has_disease(covid19) :- 
+    symptom(covid19, fever), 
+    symptom(covid19, cough), 
+    symptom(covid19, loss_of_taste), 
+    symptom(covid19, difficulty_breathing).
+
+% User input
+ask_symptom(Symptom) :-
+    write('Do you have the following symptom: '), write(Symptom), write('? (yes/no)'), nl,
+    read(Response),
+    (Response == yes -> assert(user_symptom(Symptom)) ; true).
+
+% Collect user symptoms
+collect_symptoms :- 
+    symptom(_, Symptom),
+    ask_symptom(Symptom),
+    fail.
+collect_symptoms.
+
+% Diagnose based on user symptoms
+diagnose :-
+    retractall(user_symptom(_)),
+    collect_symptoms,
+    (
+        has_disease(Disease),
+        user_symptom(Symptom),
+        symptom(Disease, Symptom),
+        write('You might have: '), write(Disease), nl, fail
+    ;
+        write('No diagnosis could be made.'), nl
+    ).
+
+% Start diagnosis process
+start :-
+    write('Welcome to the Medical Diagnosis System'), nl,
+    write('Please answer the following questions:'), nl,
+    diagnose.
+
+
+
+
+
+
+
+
+symptom(Disease, Symptom).
+
